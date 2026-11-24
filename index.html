@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Inspección Visual PWA</title>
+  <meta name="theme-color" content="#0f172a">
+  <meta name="description" content="Captura de evidencia fotográfica con acceso consciente a cámara.">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/png" href="./icons/icon-192.png">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header class="encabezado">
+    <h1>Inspección Visual</h1>
+    <button id="btn-instalar" class="btn btn-secundario" type="button" hidden>Instalar App</button>
+  </header>
+
+  <main class="contenido">
+    <section class="visor-contenedor" aria-label="Vista previa de la cámara">
+      <video id="visor-camara" autoplay playsinline muted></video>
+      <p class="visor-vacio" id="visor-vacio">La cámara está apagada</p>
+    </section>
+
+    <p id="mensaje-estado" class="estado" role="status" aria-live="polite">Cámara apagada.</p>
+
+    <!-- Tarjeta de aviso ético (pre-permiso). Oculta por defecto. -->
+    <section id="aviso-permiso" class="aviso" role="dialog" aria-labelledby="aviso-titulo" hidden>
+      <h2 id="aviso-titulo">¿Por qué necesitamos tu cámara?</h2>
+      <p>
+        Esta aplicación requiere acceso a tu cámara únicamente para mostrar una
+        vista previa local en pantalla. Ninguna imagen se envía a servidores externos.
+      </p>
+      <ul>
+        <li>Se encenderá la cámara <strong id="aviso-lente">trasera</strong>.</li>
+        <li>El video se procesa solo en tu dispositivo.</li>
+        <li>Puedes apagarla cuando quieras.</li>
+      </ul>
+      <p class="aviso-nota">
+        Después verás el cuadro nativo de tu navegador: elige <strong>Permitir</strong>.
+      </p>
+      <div class="acciones">
+        <button id="btn-cancelar-permiso" class="btn btn-secundario" type="button">Ahora no</button>
+        <button id="btn-confirmar-permiso" class="btn btn-primario" type="button">Aceptar y Encender Cámara</button>
+      </div>
+    </section>
+
+    <div class="controles">
+      <button id="btn-preparar-camara" class="btn btn-primario" type="button">Solicitar Acceso a Cámara</button>
+      <button id="btn-alternar-camara" class="btn btn-secundario" type="button" disabled>Cambiar Cámara</button>
+      <button id="btn-apagar-camara" class="btn btn-peligro" type="button" disabled>Apagar Cámara</button>
+    </div>
+  </main>
+
+  <script src="./app.js"></script>
+</body>
+</html>
