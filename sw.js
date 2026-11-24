@@ -1,5 +1,5 @@
 // Service Worker - estrategia Cache First (sin async/await)
-const NOMBRE_CACHE = 'inspeccion-pwa-v2';
+const NOMBRE_CACHE = 'inspeccion-pwa-v3';
 
 const ARCHIVOS_PRECACHE = [
   './index.html',

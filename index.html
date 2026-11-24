@@ -8,6 +8,7 @@
   <meta name="description" content="Captura de evidencia fotográfica con acceso consciente a cámara.">
   <link rel="manifest" href="./manifest.json">
   <link rel="icon" type="image/png" href="./icons/icon-192.png">
+  <link rel="apple-touch-icon" href="./icons/icon-192.png">
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
@@ -17,6 +18,20 @@
   </header>
 
   <main class="contenido">
+    <!-- Guía de instalación manual: solo se muestra en iPhone/iPad fuera del modo instalado -->
+    <section id="instrucciones-ios" class="guia-ios" aria-labelledby="guia-ios-titulo" hidden>
+      <h2 id="guia-ios-titulo">Instalar en iPhone</h2>
+      <p>
+        Para instalar en iPhone, pulsa el icono <strong>Compartir</strong>
+        <span class="icono-compartir" aria-hidden="true">&#x2B06;&#xFE0E;</span>
+        y selecciona <strong>'Agregar a inicio'</strong>.
+      </p>
+      <p class="aviso-nota">
+        Safari y la app instalada no comparten permisos: al abrirla desde el icono
+        se te volverá a pedir acceso a la cámara.
+      </p>
+    </section>
+
     <section class="visor-contenedor" aria-label="Vista previa de la cámara">
       <video id="visor-camara" autoplay playsinline muted></video>
       <p class="visor-vacio" id="visor-vacio">La cámara está apagada</p>

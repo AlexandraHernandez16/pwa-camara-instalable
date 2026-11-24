@@ -118,6 +118,19 @@ body {
   color: #9f1239;
 }
 
+/* ---------- Guía de instalación en iOS ---------- */
+.guia-ios {
+  background: #fefce8;
+  border: 2px solid #fde047;
+  border-radius: 16px;
+  padding: 14px 16px;
+}
+
+.guia-ios h2 { margin: 0 0 6px; font-size: 1rem; color: #854d0e; }
+.guia-ios p  { margin: 0 0 8px; line-height: 1.5; }
+.guia-ios p:last-child { margin-bottom: 0; }
+.icono-compartir { display: inline-block; font-size: 1.1em; color: var(--primario-oscuro); }
+
 /* ---------- Aviso ético ---------- */
 .aviso {
   background: var(--superficie);

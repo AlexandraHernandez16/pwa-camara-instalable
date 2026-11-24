@@ -70,6 +70,26 @@ window.addEventListener('appinstalled', () => {
   eventoInstalacionDiferido = null;
 });
 
+/* Detección de iOS y modo instalado.
+   iOS nunca dispara 'beforeinstallprompt': la instalación es manual
+   (Compartir -> Agregar a inicio), así que se muestra una guía visual. */
+function verificarEntornoIOS() {
+  const ua = navigator.userAgent;
+  // iPadOS 13+ se identifica como "Macintosh" pero tiene pantalla táctil
+  const esIPadOS = navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1;
+  const esIOS = (/iPad|iPhone|iPod/.test(ua) || esIPadOS) && !window.MSStream;
+  const estaInstalada = window.navigator.standalone === true ||
+                        window.matchMedia('(display-mode: standalone)').matches;
+
+  // Si está en iPhone y aún la ve desde el navegador, mostrar instrucciones manuales
+  if (esIOS && !estaInstalada) {
+    const guiaIOS = document.getElementById('instrucciones-ios');
+    if (guiaIOS) guiaIOS.hidden = false;
+  }
+}
+
+verificarEntornoIOS();
+
 /* Registro del Service Worker (requisito de instalabilidad) */
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
@@ -128,6 +148,9 @@ function iniciarCamara(modo) {
 
       if (error.name === 'NotAllowedError') {
         actualizarMensajeEstado('Permiso denegado. Habilita el acceso a la cámara en los ajustes de tu navegador.', true);
+      } else if (error.name === 'NotReadableError') {
+        // WebKit/Android: el sensor sigue ocupado por otra pista o aplicación
+        actualizarMensajeEstado('La cámara está ocupada. Apágala e inténtalo de nuevo.', true);
       } else if (error.name === 'NotFoundError') {
         actualizarMensajeEstado('No se detectó el sensor de cámara solicitado en este dispositivo.', true);
       } else {
